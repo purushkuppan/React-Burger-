@@ -13,13 +13,11 @@ class BurgerIncredient extends Component {
                 break;
             case (myConstClass.BREAD_TOP) :
                 incredent = (
-                    <div>
-                        <div className={classes.BreadTop}>
-                            <div className={classes.Seeds1}></div>
-                            <div className={classes.Seeds2}></div>
-                        </div>
+                    <div className={classes.BreadTop}>
+                        <div className={classes.Seeds1}></div>
+                        <div className={classes.Seeds2}></div>
                     </div>
-                )
+                );
                 break;
             case (myConstClass.MEAT) :
                 incredent = <div className={classes.Meat}></div>

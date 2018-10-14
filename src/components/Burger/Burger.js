@@ -7,10 +7,10 @@ const burger =(probs) => {
     return (
         <div className={classes.Burger}>
             <BurgerIncredient type={myConstClass.BREAD_TOP}/>
-            {/*<BurgerIncredient type={myConstClass.CHEESE}/>
+            <BurgerIncredient type={myConstClass.CHEESE}/>
             <BurgerIncredient type={myConstClass.SALAD}/>
             <BurgerIncredient type={myConstClass.MEAT}/>
-            <BurgerIncredient type={myConstClass.BREAD_BOTTOM}/>*/}
+            <BurgerIncredient type={myConstClass.BREAD_BOTTOM}/>
         </div>
 
     )
