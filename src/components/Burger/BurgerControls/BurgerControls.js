@@ -14,8 +14,13 @@ const controls = [
 
 const BurgerControls = (props) => (
 <div className={classes.BuildControls}>
+    <p>Price :<strong>{props.price.toFixed(2)}</strong></p>
     {controls.map(cntl => (
-        <BuildControl key={cntl.label} label={cntl.label} add={()=>props.added(cntl.type)} remove = {()=>props.remove(cntl.type)} disabled={props.disabled[cntl.type]} />
+        <BuildControl
+            key={cntl.label} label={cntl.label}
+            add={()=>props.added(cntl.type)}
+            remove = {()=>props.remove(cntl.type)}
+            disabled={props.disabled[cntl.type]} />
     ))}
 </div>
 )
