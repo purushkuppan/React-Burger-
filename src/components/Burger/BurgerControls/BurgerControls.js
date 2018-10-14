@@ -15,7 +15,7 @@ const controls = [
 const BurgerControls = (props) => (
 <div className={classes.BuildControls}>
     {controls.map(cntl => (
-        <BuildControl key={cntl.label} label={cntl.label} />
+        <BuildControl key={cntl.label} label={cntl.label} add={()=>props.added(cntl.type)} remove = {()=>props.remove(cntl.type)} disabled={props.disabled[cntl.type]} />
     ))}
 </div>
 )
