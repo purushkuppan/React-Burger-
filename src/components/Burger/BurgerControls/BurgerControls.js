@@ -22,6 +22,8 @@ const BurgerControls = (props) => (
             remove = {()=>props.remove(cntl.type)}
             disabled={props.disabled[cntl.type]} />
     ))}
+
+    <button className={classes.Button} disabled={!props.displayButton} onClick={props.purchased}>Order Now </button>
 </div>
 )
 

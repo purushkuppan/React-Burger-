@@ -8,3 +8,11 @@
     margin: auto;
     padding: 10px 0;
 }
+
+.Button{
+    background-color: darkorange;
+    width: 101px;
+    height: 31px;
+    color: currentColor;
+
+}
