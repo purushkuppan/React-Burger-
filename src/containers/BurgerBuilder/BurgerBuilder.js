@@ -4,6 +4,7 @@ import BurgerControls from '../../components/Burger/BurgerControls/BurgerControl
 import * as myConstClass from '../../Constant';
 import Modal from '../../components/UI/Modal/modal'
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary'
+
 import axios from '../../axios-orders'
 import Spinner from '../../components/UI/Spinner/Spinner'
 import WithErrorHandler from '../../components/withErrorHandler/withErrorHandler'
@@ -73,7 +74,8 @@ class BurgerBuilder extends Component {
         for(let i in this.state.ingredients){
             queryParams.push(encodeURIComponent(i)+ "="+encodeURIComponent(this.state.ingredients[i]))
         }
-const queryString = queryParams.join("&")
+        queryParams.push("price="+this.state.totalPrice)
+    const queryString = queryParams.join("&")
         this.props.history.push({
             pathname: '/checkout',
             search: queryString
