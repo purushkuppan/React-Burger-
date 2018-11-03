@@ -69,7 +69,16 @@ class BurgerBuilder extends Component {
     }
 
     isContinued  = () => {
-        this.setState({spinner : true})
+        const queryParams = []
+        for(let i in this.state.ingredients){
+            queryParams.push(encodeURIComponent(i)+ "="+encodeURIComponent(this.state.ingredients[i]))
+        }
+const queryString = queryParams.join("&")
+        this.props.history.push({
+            pathname: '/checkout',
+            search: queryString
+        });
+       /* this.setState({spinner : true})
         const orderDetail = {
             ingredient : this.state.ingredients,
             totalPrice : this.state.totalPrice,
@@ -83,7 +92,7 @@ class BurgerBuilder extends Component {
         }
         axios.post('/orders.json', orderDetail)
             .then( res => {this.setState({spinner : true, purchasable : false})})
-            .catch(error => {this.setState({spinner : true, purchasable : false})})
+            .catch(error => {this.setState({spinner : true, purchasable : false})})*/
     }
 
 
