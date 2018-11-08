@@ -4,7 +4,6 @@ import BurgerControls from '../../components/Burger/BurgerControls/BurgerControl
 import * as myConstClass from '../../Constant';
 import Modal from '../../components/UI/Modal/modal'
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary'
-
 import axios from '../../axios-orders'
 import Spinner from '../../components/UI/Spinner/Spinner'
 import WithErrorHandler from '../../components/withErrorHandler/withErrorHandler'
@@ -12,7 +11,6 @@ import {connect} from 'react-redux'
 
 class BurgerBuilder extends Component {
     state = {
-
         displayOrder : false,
         purchasable : false,
         spinner : false
@@ -46,17 +44,7 @@ class BurgerBuilder extends Component {
     }
 
     isContinued  = () => {
-        const queryParams = []
-        for(let i in this.props.ingre){
-            queryParams.push(encodeURIComponent(i)+ "="+encodeURIComponent(this.props.ingre[i]))
-        }
-        queryParams.push("price="+this.props.totPrice)
-    const queryString = queryParams.join("&")
-        this.props.history.push({
-            pathname: '/checkout',
-            search: queryString
-        });
-
+        this.props.history.push('/checkout');
     }
 
 
