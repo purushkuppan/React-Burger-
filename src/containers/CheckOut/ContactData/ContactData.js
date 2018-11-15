@@ -5,6 +5,7 @@ import axios from '../../../axios-orders'
 import Spinner from '../../../components/UI/Spinner/Spinner'
 import Input from '../../../components/UI/Input/Input';
 import {connect} from 'react-redux'
+import WithErrorHandler from '../../../components/withErrorHandler/withErrorHandler'
 
 
 class ContactData extends Component {
@@ -209,4 +210,11 @@ const mapStatetoProps = state =>{
         price: state.totalPrice
     }
 }
-export default connect(mapStatetoProps)(ContactData);
+
+const mapDispatchtoProps = props =>{
+    return {
+        ingredients : state.ingredients,
+        price: state.totalPrice
+    }
+}
+export default connect(mapStatetoProps, mapDispatchtoProps)(WithErrorHandler(ContactData, axios));

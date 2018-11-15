@@ -1,28 +1,22 @@
 import React, {Component} from 'react'
 import Burger from '../../components/Burger/Burger'
 import BurgerControls from '../../components/Burger/BurgerControls/BurgerControls'
-import * as myConstClass from '../../Constant';
 import Modal from '../../components/UI/Modal/modal'
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary'
 import axios from '../../axios-orders'
 import Spinner from '../../components/UI/Spinner/Spinner'
 import WithErrorHandler from '../../components/withErrorHandler/withErrorHandler'
 import {connect} from 'react-redux'
+import * as BurgerActionType from '../../Store/Actions/index'
 
 class BurgerBuilder extends Component {
     state = {
         displayOrder : false,
-        purchasable : false,
-        spinner : false
+        purchasable : false
     }
 
-
     componentDidMount (){
-        axios.get('https://react-burger-purush.firebaseio.com/ingredients.json')
-            .then(res => {
-
-                this.setState({ingredients: res.data})
-            })
+        this.props.initIngredients()
     }
 
     showButton(newIngredent) {
@@ -47,7 +41,6 @@ class BurgerBuilder extends Component {
         this.props.history.push('/checkout');
     }
 
-
     render() {
         let disableValue = {
             ...this.props.ingre
@@ -62,7 +55,7 @@ class BurgerBuilder extends Component {
             orderSum = <Spinner/>
         }
 
-        let burger = <Spinner/>
+        let burger =this.props.error ? <p>Ingredeient cannot be loaded!!! </p> : <Spinner/>
         if (this.props.ingre) {
             burger =(
                 <>
@@ -73,18 +66,15 @@ class BurgerBuilder extends Component {
             disabled={false}
             price={this.props.totPrice}
             purchased = {this.isOrderButtonClicked}
-
             displayButton={this.showButton(this.props.ingre)}/>
-                    </>)
+            </>
+            )
 
             orderSum = <OrderSummary ingredient = {this.props.ingre}
                                      cancel={this.isBackDropClicked}
                                      continue={this.isContinued}
                                      price={this.props.totPrice}/>
 
-        }
-        if (this.state.spinner) {
-            orderSum = <Spinner/>
         }
 
       return (
@@ -102,16 +92,17 @@ class BurgerBuilder extends Component {
 const setStatetoProps = state => {
     return {
         ingre: state.ingredients,
-        totPrice: state.totalPrice
+        totPrice: state.totalPrice,
+        error : state.error
     }
 }
 
 const setDispachtoProps = dispatch => {
     return {
-        onAddIng: (inge) => dispatch({type: myConstClass.ADD_INGREDIENT, inge: inge}),
-        onRemove: (inge) => dispatch({type: myConstClass.REMOVE_INGREDIENT, inge: inge})
+        onAddIng: (inge) => dispatch(BurgerActionType.addIngredients(inge)),
+        onRemove: (inge) => dispatch(BurgerActionType.removeIngredients(inge)),
+        initIngredients : () => dispatch(BurgerActionType.initIngredients())
     }
 }
-
 
 export default connect(setStatetoProps, setDispachtoProps)(WithErrorHandler(BurgerBuilder, axios));
